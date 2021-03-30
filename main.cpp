@@ -14,6 +14,7 @@
 #include<map>
 #include<exception>
 using namespace std;
+int Autotest();
 CComplexVector* CreateCComplexVector(string &str, map<string,CComplexVectorFabric*> &FabricMap){
     string tp;
     string arg;
@@ -30,9 +31,8 @@ CComplexVector* CreateCComplexVector(string &str, map<string,CComplexVectorFabri
         throw -1;
     }
 }
-//int Autotest();
 int main () {
-//Autotest();
+Autotest();
 map<string,CComplexVectorFabric*> fabrip;
 fabrip["Hori"] = new CComplexVectorFabric0(); 
 fabrip["Vert"] = new CComplexVectorFabric1(); 
@@ -43,14 +43,21 @@ if (fin.fail()) {
 }
 string str;
 std::vector<CComplexVector*> arr;
-while(getline(fin,str)){
+try {
+    while(getline(fin,str)){
         arr.push_back(CreateCComplexVector(str,fabrip));
+    }
+    for(auto i = arr.begin(); i != arr.end(); ++i){
+	    (*i)->output();
+    }
+    for(auto i = arr.begin(); i != arr.end(); ++i){
+	    delete (*i);
+    }
 }
-for(auto i = arr.begin(); i != arr.end(); ++i){
-	(*i)->output();
+catch (int e) {
+    printf("There is no correct input!");
 }
-for(auto i = arr.begin(); i != arr.end(); ++i){
-	delete (*i);
-}
+delete fabrip["Hori"];
+delete fabrip["Vert"];
 return 0;
 }
