@@ -4,6 +4,7 @@
 using namespace std;
 class CComplexVector0: public CComplexVector {
     public:
+    	using CComplexVector::operator=;
         CComplexVector0 (int M);
         ~CComplexVector0 ();
         CComplexVector0 (const CComplexVector &b);

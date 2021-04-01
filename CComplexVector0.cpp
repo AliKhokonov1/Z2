@@ -3,6 +3,7 @@
 #include"CComplexVector.h"
 #include"CComplexPoint.h"
 #include <fstream>
+#include <iostream>
 CComplexVector0::CComplexVector0(int M):CComplexVector(M){}
 CComplexVector0::~CComplexVector0() {}
 CComplexVector0::CComplexVector0(const CComplexVector &b):CComplexVector(b) {}
@@ -26,7 +27,7 @@ CComplexVector0 operator+(const CComplexVector &a, const CComplexVector &b){
 	    cout<<"No";
 	}
 	for(int i = 0; i < a.size(); i++){
-		p.getVector()[i]=a.getVector()[i]+b.getVector()[i];
+		p.getVector()[i]=const_cast<CComplexVector &>(a).getVector()[i]+const_cast<CComplexVector &>(b).getVector()[i];
 	}
 	return p;
 }
@@ -36,7 +37,7 @@ CComplexVector0 operator-(const CComplexVector &a, const CComplexVector &b){
 	    cout<<"No";
 	}
 	for(int i = 0; i < a.size(); i++){
-		p.getVector()[i]=a.getVector()[i]-b.getVector()[i];
+		p.getVector()[i]=const_cast<CComplexVector &>(a).getVector()[i]-const_cast<CComplexVector &>(b).getVector()[i];
 	}
 	return p;
 }
