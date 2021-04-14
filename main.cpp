@@ -59,9 +59,9 @@ catch (int e) {
 }
 delete fabrip["Hori"];
 delete fabrip["Vert"];
-const int n = 10000000000;
+const int n = 1000000;
 CComplexVector0 tmp1(n);
-CComplexVector0 tmp2(n);
+CComplexVector1 tmp2(n);
 for(int j = 0; j < n; j++){
 	tmp1.set(j,CComplexPoint(rand(),rand()));
 }

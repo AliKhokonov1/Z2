@@ -56,7 +56,7 @@ CComplexVector0 operator-(const CComplexVector &a, const CComplexVector &b){
 	}
 	std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
 	int elapsed_ms = static_cast<int>( std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() );
-	std::cout<< "Addition operator runtime is " <<elapsed_ms <<" ms\n";
+	std::cout<< "Subtraction operator runtime is " <<elapsed_ms <<" ms\n";
 	return p;
 }
 
