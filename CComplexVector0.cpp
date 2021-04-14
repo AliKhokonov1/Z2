@@ -26,9 +26,18 @@ CComplexVector0 operator+(const CComplexVector &a, const CComplexVector &b){
 	if (a.size() != b.size()) {
 	    cout<<"No";
 	}
+	std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
+	#pragma omp parallel shared(p,a)//”казываю какаие переменные общие дл€ потоков
+    {
+        #pragma omp for
 	for(int i = 0; i < a.size(); i++){
 		p.getVector()[i]=const_cast<CComplexVector &>(a).getVector()[i]+const_cast<CComplexVector &>(b).getVector()[i];
+	
+	    }
 	}
+	std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
+	int elapsed_ms = static_cast<int>( std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() );
+    std::cout<< "Addition operator runtime is " <<elapsed_ms <<" ms\n";
 	return p;
 }
 CComplexVector0 operator-(const CComplexVector &a, const CComplexVector &b){
@@ -36,8 +45,18 @@ CComplexVector0 operator-(const CComplexVector &a, const CComplexVector &b){
 	if (a.size() != b.size()) {
 	    cout<<"No";
 	}
+	std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
+	#pragma omp parallel shared(p,a)//”казываю какаие переменные общие дл€ потоков
+    {
+        #pragma omp for
 	for(int i = 0; i < a.size(); i++){
 		p.getVector()[i]=const_cast<CComplexVector &>(a).getVector()[i]-const_cast<CComplexVector &>(b).getVector()[i];
+	
+	    }
 	}
+	std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
+	int elapsed_ms = static_cast<int>( std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() );
+	std::cout<< "Addition operator runtime is " <<elapsed_ms <<" ms\n";
 	return p;
 }
+

@@ -53,18 +53,24 @@ return e;
 
 CComplexPoint CComplexVector::operator*(CComplexVector &q){
 	CComplexPoint s(0,0);
+	 std::chrono::time_point<std::chrono::system_clock> start = std::chrono::system_clock::now();
+	 #pragma omp parallel shared(e) reduction(+:s)
+    {
+        #pragma omp for
 	for(int i = 0; i < N; i++){
 		s=s+CComplexPoint(e[i].Re()*q.getVector()[i].Re()+e[i].Im()*q.getVector()[i].Im(),e[i].Re()*q.getVector()[i].Im()-e[i].Im()*q.getVector()[i].Re());		 
-	}
+	    }
+    }
+	std::chrono::time_point<std::chrono::system_clock> end = std::chrono::system_clock::now();
+	int elapsed_ms = static_cast<int>( std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() );
+	std::cout<< "Addition operator runtime is " <<elapsed_ms <<" ms\n";
 	return s;
-}
-void CComplexVector::setFilename(std::string f){
+    }
+void CComplexVector::setFilename (std::string f){
 	this->filename = f;
 }
 
-int CComplexVector::size() const {
+int CComplexVector::size () const {
     return N;
 }
-
-
 
